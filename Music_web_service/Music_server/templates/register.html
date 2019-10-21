@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <style>
+body {
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  background: linear-gradient(45deg, #49a09d, #610e7e);
+  font-family: sans-serif;
+  font-weight: 100;
+}
+h1{
+  color: #a3d4d2;
+  margin-bottom: 5px;
+  font-weight: 100;
+  font-size: 40px;
+}
+.container {
+
+  width: 1450px;
+  overflow: auto;
+  position: absolute;
+  top: 20%;
+  left: 12%;
+  bottom:10%;
+}
+
+.btn
+{
+  margin-top: 45px;
+  color: #a3d4d2;
+  font-size: 18px;
+  background-color: #610e7e;
+  border: none;
+
+  border-radius:30px;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-size:14px;
+  padding:10px 28px;
+  text-shadow:0px 1px 0px #2f6627;
+}
+.btn:hover {
+  background-color:#540a6d;
+}
+.btn:active {
+  position:relative;
+  top:1px;
+}
+input[type=text], input[type=password] {
+  padding: 2px 0px;
+  margin: 8px 0px;
+  box-sizing: border-box;
+  border: none;
+  background-color: rgb(0,0,0,0);
+  font-size: 18px;
+  color: white;
+}
+    </style>
+    <title>Flask Intro - login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <center>
+    <div class="container">
+      <h1>Create account</h1>
+      <br>
+      <form action="" method="post">
+        <br>
+        <input type="text" placeholder="Username" name="username" value="{{
+          request.form.username }}">
+        <br>
+        <input type="password" placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        <br>
+        <input type="text" placeholder="Mail" name="mail" value="{{
+          request.form.mail }}">
+        <br>
+        <input class="btn btn-default" type="submit" value="Register">
+      </form>
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    </div>
+    </center>
+  </body>
+</html>
