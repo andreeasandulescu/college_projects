@@ -1,0 +1,19 @@
+set style line 1 lc rgb '#0000FF' lt 5 lw 2 pt 7 ps 2
+set style line 2 lc rgb '#00BFFF' lt 5 lw 2 pt 7 ps 2
+set style line 3 lc rgb '#32CD32' lt 5 lw 2 pt 7 ps 2
+set style line 4 lc rgb '#7CFC00' lt 5 lw 2 pt 7 ps 2
+set style line 5 lc rgb '#FFA500' lt 5 lw 2 pt 7 ps 2
+set style line 6 lc rgb '#FFD700' lt 5 lw 2 pt 7 ps 2
+set style line 7 lc rgb '#8A2BE2' lt 5 lw 2 pt 7 ps 2
+set style line 8 lc rgb '#9370DB' lt 5 lw 2 pt 7 ps 2
+set key
+set xlabel "Size"
+set ylabel "Time"
+plot 'blas_gcc_plot' title "blas gcc" with linespoints ls 1, \
+	 'blas_icc_plot' title "blas icc" with linespoints ls 2, \
+	 'opt_m_gcc_plot' title "opt_m gcc" with linespoints ls 3, \
+	 'opt_m_icc_plot' title "opt_m icc" with linespoints ls 4, \
+	 'opt_f_gcc_plot' title "opt_f gcc" with linespoints ls 5, \
+	 'opt_f_icc_plot' title "opt_f icc" with linespoints ls 6, \
+	 'neopt_gcc_plot' title "neopt gcc" with linespoints ls 7, \
+	 'neopt_icc_plot' title "neopt icc" with linespoints ls 8
