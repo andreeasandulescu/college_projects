@@ -1,0 +1,37 @@
+//Sandulescu Andreea, 342C3, Tema 1
+
+	In CoolLexer, am definit reguli separate pentru cazurile de eroare si am alterat
+token-ul intors de regula STR(stringuri care pentru a fi considerate corecte trebuie
+verificate din punct de vedere al lungimii).
+	In functia alterStr, aplic transformarile necesare si fie apelez raiseError, fie
+modific lexemul intors(setText).
+	Functia replaceWhileExists inlocuieste un subsir de lungime 2(toBeRepl), cu un 
+altul(replWith).Nu am mai calculat in functie lungimea substringului, deoarece o
+voi apela doar pentru substringuri ce trebuie inlocuite de lungime 2.
+
+	In CoolParser, am definit regulile auxiliare attrib si case_attrib pentru
+instructiunile case si let, ca sa pot obtine o lista de atribute, fiind mai usor
+sa memorez carui atribut ii este asignata o anumita valoare/daca un atribut nu
+are o val asignata.
+	Regula error contine toate cazurile de eroare definite in lexer.
+
+	In pachetul cool.AST se afla toate clasele ce pot fi noduri in AST-ul creat in 
+urma apelurilor visit.
+	Avand in vedere ca mai multe instructiuni au nevoie de atribute, constructorul
+clasei AttrNode primeste si un numar(int op), pentru afisare corecta.Un atribut
+poate avea sau nu o expresie asignata, are un nume, tip si "operatie".
+	ChildrenListNode este folosit pentru apelurile de functii si instructiuni bloc.
+Clasa contine o lista de ASTNode (noduri expresie), ce reprezinta expresiile din 
+bloc/parametrii functiei, "operatie" (".", "block" sau "implicit dispatch"), 
+methName = numele metodei, objName = numele obiectului pe care e apelata, 
+className = clasă statica dispatch.
+	LetInstrNode contine o lista de atribute(AttrNode), ce reprezinta variabilele
+(ne)initializate aflate intre "let" si "in".Am ales sa nu aiba ca membru o lista
+de ASTNode pentru a putea apela direct metoda de afisare a clasei atribut.
+	Clasa MethNode contine o lista de parametrii(Formal), nume, tip si un nod AST
+ce reprezinta corpul functiei.
+Assignment-ul este privit ca o operatie binara, intre un literal si o expresie.
+
+In clasa MyParseTreeVisitor am adaugat implementarea metodelor visit, ce vor
+intoarce obiecte de tipul ASTNode, folosindu-se de obiecte de tipul claselor
+mentionate mai sus, ce implementeaza interfata ASTNode, ce contine metoda toStr.
