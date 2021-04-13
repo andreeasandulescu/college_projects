@@ -1,0 +1,30 @@
+//Sandulescu Andreea, 331CB
+
+In parse_simple, verific daca exista comenzi interne(quit, exit, cd), urmand sa obtin lista de argumente ale
+comenzii(pentru comenzi diferite de "cd"), pentru apelul execvp().Apoi apelez set_env_vars, ce intoarce -2
+daca operatia ce trebuie executata nu este definirea unei variabile, respectiv 0 sau 1 daca adaugarea
+variabilei/schimbarea valorii variabilei a fost executata cu succes sau nu.
+
+Creez un nou proces, pentru a putea executa comanda(simple_command_t), apland mai intai functia redirect().
+Aceasta verifica atributele in, out si err, iar pentru cele != NULL face redirectarile necesare.In cazul in
+care operatorul folosit este &>, pentru redirectare stderr nu se mai deschide fisierul, deoarece acesta a
+fost deja deschis mai sus, avand si campul out != NULL.Dupa intoarcerea din functie apelez execvp cu lista
+de argumente din argv, pentru rularea comenzii si obtinerea codului de eroare al acesteia.
+
+Am observat ca in bash, orice redirectare dupa comanda "cd" rezulta in crearea unui fisier in vechiul director,
+asa ca, in procesul parinte, pentru comanda "cd", apelez functia chdir, pentru a schimba working directory-ul
+dupa redirectari(in procesul fiu nu aplez execvp cu "cd").
+
+In functia do_in_parallel,parintele va executa prima comanda, iar procesul fiu creat o va executa pe prima.
+Daca codurile de eroare sunt aceleasi, sunt intoarse, daca nu, se intoarce 1(codul de eroare al comenzii 
+care a intors 1).
+
+Pentru || si &&, execut secvential comenzile(a doua comanda se executa in functie de rezultatul primei
+comenzi).
+
+Pentru do_on_pipe, creez un pipe, astfel incat procesul fiu va scrie in pipe, iar procesul parinte va
+citi din pipe.Pentru aceasta, e nevoie sa inchid stdout pentru fiu si sa duplic filedescriptorul corespunzator
+capatului de scriere, iar pentru parinte, sa inchid stdin si sa duplic fd-ul corespunzator capatului de citire,
+iar apoi execut comenzile(cmd1, cmd2).Avand in vedere ca procesul parinte nu isi va termina executia dupa
+aceasta operatie, este nevoie sa pastrez o copie a fd-ului corespunzator pentru stdin pentru a putea reface
+stdin-ul dupa executia comenzii.
