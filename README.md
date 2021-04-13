@@ -1,2 +1,2 @@
 # college_projects
-Projects and homeworks i worked on in college.
+Some of my college homework and assignments
